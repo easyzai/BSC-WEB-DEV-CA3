@@ -1,0 +1,50 @@
+My project's settings were organized into two main files: 'settings.py' and
+'settings_test'. They were placed inside a folder named 'settings' with an 'init.py'
+file to mark the directory as a Python package. In the 'manage.py' file, I used the
+'test_settings' as the app setting when running the app.
+
+#test_settings to run the tests (python manage.py test)
+For testing, I created a TestCase subclass named 'QuestionModelTests' that tests
+the behavior of the Question model. It includes three methods:
+
+• 'test_was_published_recently_with_future_question': This method tests
+that the 'was_published_recently()' method returns False for questions with
+a 'pub_date' in the future.
+
+• 'test_was_published_recently_with_old_question': This method tests that
+the 'was_published_recently()' method returns False for questions with a
+'pub_date' older than one day.
+
+• 'test_was_published_recently_with_recent_question': This method tests
+that the 'was_published_recently()' method returns True for questions with
+a 'pub_date' within the last day.
+
+#Security
+To enhance the app's security, I implemented additional anti-hacking security
+checks such as CSS, SQL injection, and redirection. Specifically, I used the following
+techniques:
+
+• Cross-Site Scripting (XSS) Protection using Content Security Policy (CSP): I
+added the 'csp.middleware.CSPMiddleware' in our 'settings.py' file and
+installed it using 'pip install django-csp'. This technique uses Content
+Security Policy (CSP) to specify which sources of content are allowed to be
+loaded on our website, thus preventing XSS attacks.
+
+• SQL Injection Protection using Django's built-in querysets: I used the latest
+Django release which automatically performs the querysets against SQL
+injections, thus protecting the website's database from unauthorized
+access.
+
+• Redirection Protection using SSL-Redirection and CSRF configuration in our
+'test_settings' file: I enabled secure cookies and SSL redirection using the
+following settings: 'SESSION_COOKIE_SECURE = True',
+'CSRF_COOKIE_SECURE = True', 'SECURE_SSL_REDIRECT = True'. 
+
+This technique helps prevent redirection attacks by validating all the URLs on our
+website, especially the ones that redirect users. We can use Django's
+built-in URL validation functions to validate URLs.
+
+ 
+
+
+
